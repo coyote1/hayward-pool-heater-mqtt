@@ -579,10 +579,10 @@ void setup()
     delay(500);
 
     // OTA webserver
-    // httpUpdater.setup(&server);
-    // server.on("/", HTTP_GET, []()
-    //           { server.send(200, "text/plain", "Ok"); });
-    // server.begin();
+     httpUpdater.setup(&server);
+     server.on("/", HTTP_GET, []()
+               { server.send(200, "text/plain", "Ok"); });
+     server.begin();
 
     client.setServer(mqtt_server, 1883);
     client.setCallback(mqttMsgReceivedCallBack);
@@ -682,7 +682,7 @@ void loop()
                 {
                     ftempOut = ftempOut + 0.5;
                 }
-                currentTempOut = fixTempValue(ftempOut, currentTempIn, wrongValueIterationTempOut);
+                currentTempOut = fixTempValue(ftempOut, currentTempOut, wrongValueIterationTempOut);
                 Serial.print("TEMP OUT:");
                 Serial.println(currentTempOut);
             }
